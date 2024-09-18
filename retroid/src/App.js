@@ -4,25 +4,27 @@ import Panier from './screens/panier';
 import ProductList from './screens/product_list';
 import ProductDetails from './screens/product_details';
 import Fondsecrans from './screens/fonds-ecrans';
-import Carousel1 from './screens/caroussel';
+import Carousel1 from './screens/acc_component/caroussel';
 import CreateProduct from './screens/createProduct';
 import Navbar from './Navbar';  // Importer le composant Navbar
+import Block2 from './screens/acc_component/block2';
 
 export default function App() {
   return (
     <Router>
+      <div >
       <Navbar />  {/* Navigation */}
-      
+      </div>
       <main>
         <Routes>
           {/* Carousel uniquement sur la page d'accueil */}
           <Route path="/" element={
             <>
               <Carousel1 />
-              <h1>Welcome to the Homepage</h1>
+              <Block2 />
             </>
           } />
-          
+
           {/* Route pour le panier */}
           <Route path="/panier" element={<Panier />} />
 
