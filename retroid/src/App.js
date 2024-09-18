@@ -6,12 +6,15 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Panier from './screens/panier';
 import ProductList from './screens/product_list';
 import ProductDetails from './screens/product_details';
+import Fondsecrans from './screens/fonds-ecrans';
+import Carousel1 from './screens/caroussel';
 
 const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'Panier', href: '/panier', current: false },
-  { name: 'Product List', href: '/product-list', current: false },
-  { name: 'Product Details', href: '/product-details', current: false },
+  { name: "L'ATELIER", href: '/', current: false },
+  { name: 'PSVITA – OLED', href: '/panier', current: false },
+  { name: 'ÉDITIONS LIMITÉES', href: '/product-list', current: false },
+  { name: 'ACCESSOIRES', href: '/product-details', current: false },
+  { name: 'FONDS D’ÉCRAN', href: '/fonds-ecrans', current: false },  
 ];
 
 function classNames(...classes) {
@@ -21,7 +24,7 @@ function classNames(...classes) {
 export default function App() {
   return (
     <Router>
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="bg-slate-50">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -36,8 +39,8 @@ export default function App() {
               <div className="flex flex-shrink-0 items-center">
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  alt="Your Company"
+                  src="/logo.webp"
+                  alt="Metro retroid"
                 />
               </div>
               <div className="hidden sm:ml-6 sm:block">
@@ -47,7 +50,7 @@ export default function App() {
                       key={item.name}
                       to={item.href}
                       className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
                         'rounded-md px-3 py-2 text-sm font-medium',
                       )}
                     >
@@ -142,15 +145,19 @@ export default function App() {
           </div>
         </DisclosurePanel>
       </Disclosure>
-
+      <section>
+        <Carousel1 />
+      </section>
       <main>
         <Routes>
           <Route path="/" element={<h1>Welcome to the Homepage</h1>} />
           <Route path="/panier" element={<Panier />} />
           <Route path="/product-list" element={<ProductList />} />
           <Route path="/product-details" element={<ProductDetails />} />
+          <Route path="/fonds-ecrans" element={<Fondsecrans />} />
         </Routes>
       </main>
     </Router>
   );
+
 }
