@@ -180,6 +180,37 @@ app.post('/colors', async (req, res) => {
   }
 });
 
+app.put('/options/:id', async (req, res) => {
+  const { name, colors } = req.body; // Inclure colors si vous souhaitez les mettre à jour aussi
+
+  try {
+    const updatedOption = await Option.findByIdAndUpdate(
+      req.params.id,
+      { name, colors }, // Mettre à jour le nom et éventuellement les couleurs
+      { new: true } // Retourner le document mis à jour
+    );
+    if (!updatedOption) {
+      return res.status(404).send('Option non trouvée');
+    }
+    res.status(200).json(updatedOption);
+  } catch (error) {
+    res.status(500).send('Erreur lors de la mise à jour de l\'option');
+  }
+});
+
+// Route DELETE pour supprimer une option par ID
+app.delete('/options/:id', async (req, res) => {
+  try {
+    const option = await Option.findByIdAndDelete(req.params.id);
+    if (!option) {
+      return res.status(404).send('Option non trouvée');
+    }
+    res.status(200).send('Option supprimée avec succès');
+  } catch (error) {
+    res.status(500).send('Erreur lors de la suppression de l\'option');
+  }
+});
+
 // Lancer le serveur
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
