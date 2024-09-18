@@ -5,6 +5,7 @@ import ProductList from './screens/product_list';
 import ProductDetails from './screens/product_details';
 import Fondsecrans from './screens/fonds-ecrans';
 import Carousel1 from './screens/caroussel';
+import CreateProduct from './screens/createProduct';
 import Navbar from './Navbar';  // Importer le composant Navbar
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
 
           {/* Route pour les fonds d'écran */}
           <Route path="/fonds-ecrans" element={<Fondsecrans />} />
+          <Route path="/create-product" element={<CreateProduct />} />
         </Routes>
       </main>
     </Router>

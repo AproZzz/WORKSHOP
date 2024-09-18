@@ -15,6 +15,7 @@ const Navbar = () => {
     { name: 'ÉDITIONS LIMITÉES', href: '/product-list', current: location.pathname === '/product-list' },
     { name: 'ACCESSOIRES', href: '/product-details', current: location.pathname === '/product-details' },
     { name: 'FONDS D’ÉCRAN', href: '/fonds-ecrans', current: location.pathname === '/fonds-ecrans' },
+    { name: 'CREATION PRODUITS', href: '/create-product', current: location.pathname === '/create-product' },
   ];
 
   return (
