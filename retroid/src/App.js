@@ -8,6 +8,8 @@ import Carousel1 from './screens/acc_component/caroussel';
 import CreateProduct from './screens/createProduct';
 import Navbar from './Navbar';  // Importer le composant Navbar
 import Block2 from './screens/acc_component/block2';
+import CustomisationCards from './screens/acc_component/CustomisationCards';
+import Footer from './screens/acc_component/footer';
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
             <>
               <Carousel1 />
               <Block2 />
+              <CustomisationCards />
+              <Footer />
             </>
           } />
 
