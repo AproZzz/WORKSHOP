@@ -6,6 +6,8 @@ import ProductDetails from './screens/product_details';
 import Fondsecrans from './screens/fonds-ecrans';
 import Carousel1 from './screens/acc_component/caroussel';
 import CreateProduct from './screens/createProduct';
+import CreateProductOption from './screens/options/CreateProductOption'; // Chemin correct selon votre structure // Assurez-vous que le chemin d'import est correct
+import AddColorForm from './screens/options/AddColor'; // Chemin correct selon votre structure // Assurez-vous que le chemin d'import est correct
 import Navbar from './Navbar';  // Importer le composant Navbar
 import Block2 from './screens/acc_component/block2';
 
@@ -13,7 +15,7 @@ export default function App() {
   return (
     <Router>
       <div >
-      <Navbar />  {/* Navigation */}
+        <Navbar />  {/* Navigation */}
       </div>
       <main>
         <Routes>
@@ -37,7 +39,10 @@ export default function App() {
           {/* Route pour les fonds d'écran */}
           <Route path="/fonds-ecrans" element={<Fondsecrans />} />
           <Route path="/create-product" element={<CreateProduct />} />
-        </Routes>
+          <Route path="/create-product-option" element={<CreateProductOption />} />
+          <Route path="/" element={<ProductList />} />
+          <Route path="/products/:id" element={<ProductDetails />} /> {/* Product details route */}
+          <Route path="/add-color" element={<AddColorForm />} />        </Routes>
       </main>
     </Router>
   );
