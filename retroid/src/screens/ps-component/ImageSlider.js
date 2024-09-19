@@ -14,7 +14,7 @@ const ImageSlider = () => {
   };
 
   return (
-    <div className="w-full md:w-1/2 h-96">
+    <div className="w-full md:w-1/2 h-1/3">
       <Slider {...settings}>
         <div>
           <img src="/img/ps-front.jpg" alt="Image 1" className="object-cover w-full h-full" />

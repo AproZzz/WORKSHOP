@@ -10,6 +10,7 @@ const AddColorForm = () => {
   const [selectedProduct, setSelectedProduct] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [selectedColors, setSelectedColors] = useState([]);
+  const [selectAll, setSelectAll] = useState(false); // État pour la case "Sélectionner tout"
 
   // Récupérer les produits existants
   useEffect(() => {
@@ -41,6 +42,15 @@ const AddColorForm = () => {
     }
   }, [selectedProduct]);
 
+  // Mettre à jour les couleurs sélectionnées lorsque l'état "Sélectionner tout" change
+  useEffect(() => {
+    if (selectAll) {
+      setSelectedColors(colors.map(color => color.value));
+    } else {
+      setSelectedColors([]);
+    }
+  }, [selectAll]);
+
   // Fonction pour ajouter des couleurs
   const handleAddColors = async (e) => {
     e.preventDefault();
@@ -55,6 +65,7 @@ const AddColorForm = () => {
       toast.success('Couleurs ajoutées avec succès !'); // Afficher une notification de succès
       setSelectedOption('');
       setSelectedColors([]);
+      setSelectAll(false); // Réinitialiser la case "Sélectionner tout"
     } catch (error) {
       console.error('Erreur lors de l\'ajout des couleurs:', error);
       toast.error('Erreur lors de l\'ajout des couleurs'); // Afficher une notification d'erreur
@@ -100,6 +111,15 @@ const AddColorForm = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Couleurs</label>
+          <div className="flex items-center mb-2">
+            <input
+              type="checkbox"
+              checked={selectAll}
+              onChange={(e) => setSelectAll(e.target.checked)}
+              className="mr-2"
+            />
+            <span>Sélectionner tout</span>
+          </div>
           <div className="grid grid-cols-2 gap-4 mt-2">
             {colors.map(color => (
               <label key={color.value} className="flex items-center">
@@ -112,6 +132,10 @@ const AddColorForm = () => {
                     setSelectedColors(prevColors =>
                       checked ? [...prevColors, value] : prevColors.filter(c => c !== value)
                     );
+                    // Désélectionner "Sélectionner tout" si une couleur est décochée
+                    if (checked === false) {
+                      setSelectAll(false);
+                    }
                   }}
                   className="mr-2"
                 />

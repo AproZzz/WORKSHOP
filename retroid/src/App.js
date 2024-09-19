@@ -10,6 +10,8 @@ import CreateProductOption from './screens/options/CreateProductOption'; // Chem
 import AddColorForm from './screens/options/AddColor'; // Chemin correct selon votre structure // Assurez-vous que le chemin d'import est correct
 import Navbar from './Navbar';  // Importer le composant Navbar
 import Block2 from './screens/acc_component/block2';
+import CustomisationCards from './screens/acc_component/CustomisationCards';
+import Footer from './screens/acc_component/footer';
 
 export default function App() {
   return (
@@ -24,6 +26,8 @@ export default function App() {
             <>
               <Carousel1 />
               <Block2 />
+              <CustomisationCards />
+              <Footer />
             </>
           } />
 

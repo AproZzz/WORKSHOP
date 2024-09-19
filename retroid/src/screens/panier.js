@@ -2,6 +2,8 @@ import React from 'react';
 import Header from './ps-component/Header';  
 import ImageSlider from './ps-component/ImageSlider'; 
 import ProductDescription from './ps-component/ProductDescription'; 
+import CustomTabs from './details-component/CustomTabs';  // Importer les onglets personnalisés
+
 
 const Panier = () => {
   return (
@@ -13,6 +15,9 @@ const Panier = () => {
           <ImageSlider />
 
           <ProductDescription />
+        </div>
+        <div className="mt-8">
+          <CustomTabs />
         </div>
       </div>
     </div>
