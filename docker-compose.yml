@@ -1,13 +1,10 @@
-## Fichier : docker-compose.yml
 version: '3'
 services:
   retroid:
     container_name: retroid
     build:
-      context: ./retroid
+      context: ./retroid  
     ports:
-      - "3000:3000"
-    # stdin_open: true
+      - "3001:3000"
     volumes:
-       - ./retroid:/var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid/Dockerfile
-       - /var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid/Dockerfile/node_modules
+      - ./retroid:/var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid 
