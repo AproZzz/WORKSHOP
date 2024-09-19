@@ -1,24 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const images = [
   {
-    src: '/img/ps.jpg', // Chemin à partir du dossier public
+    src: '/img/ds.jpg',
     alt: 'NDS Lite',
     title: 'NDS LITE',
     subtitle: 'De nouveaux horizons',
-    button: 'Découvrir'
+    button: 'Découvrir',
+    textColor: 'text-black', // Texte en noir
   },
   {
-    src: '/img/ds.jpg', // Chemin à partir du dossier public
+    src: '/img/ps.jpg',
     alt: 'PS Vita OLED',
     title: 'PS VITA OLED',
     subtitle: 'De nouvelles possibilités',
-    button: 'Découvrir'
+    button: 'Découvrir',
+    textColor: 'text-white', // Texte en blanc
   }
 ];
 
 export const Carousel1 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Autoplay toutes les 5 secondes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -33,19 +46,23 @@ export const Carousel1 = () => {
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto overflow-hidden">
+    <div className="relative w-full h-[740px] mx-auto overflow-hidden bg-cover bg-bottom">
       <div className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {images.map((image, index) => (
-          <div key={index} className="w-full flex-shrink-0">
-            <div
-              className="relative h-[500px] bg-cover bg-center flex items-center justify-center text-white"
-              style={{ backgroundImage: `url(${image.src})` }}
-            >
-              <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-center">
-                <h1 className="text-4xl font-bold">{image.title}</h1>
-                <p className="text-lg mt-2">{image.subtitle}</p>
-                <button className="bg-blue-500 text-white py-2 px-4 rounded mt-4">{image.button}</button>
+          <div key={index} className="w-screen flex-shrink-0 relative">
+            <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-center" />
+            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center text-center p-4">
+              <div className="flex flex-col justify-center items-center mt-24">
+                <h1 className={`text-4xl font-bold mb-2 ${image.textColor}`}>
+                  {image.title}
+                </h1>
+                <p className={`text-lg mb-4 ${image.textColor}`}>
+                  {image.subtitle}
+                </p>
+                <button className="bg-blue-500 text-white py-2 px-4 rounded">
+                  {image.button}
+                </button>
               </div>
             </div>
           </div>

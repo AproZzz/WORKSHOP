@@ -12,7 +12,7 @@ const Footer = () => {
     centerMode: true, // Pour centrer le slide actif
     centerPadding: "0", // Pour retirer les marges sur les côtés
     slidesToScroll: 1,
-    autoplay: true, // Activation de l'autoplay
+    autoplay: false, // Activation de l'autoplay
     autoplaySpeed: 5000, // Autoplay toutes les 5 secondes
   };
 
