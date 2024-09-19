@@ -46,6 +46,37 @@ const optionSchema = new mongoose.Schema({
 });
 const Option = mongoose.model('Option', optionSchema);
 
+// Définir un schéma et un modèle pour Type
+const typeSchema = new mongoose.Schema({
+  name: String,
+});
+
+const Type = mongoose.model('Type', typeSchema);
+
+// Route pour créer un nouveau type
+app.post('/types', async (req, res) => {
+  const { name } = req.body;
+
+  try {
+    const newType = new Type({ name });
+    await newType.save();
+    res.status(201).json(newType);
+  } catch (error) {
+    res.status(500).send('Erreur lors de la création du type');
+  }
+});
+
+// Route pour récupérer tous les types
+app.get('/types', async (req, res) => {
+  try {
+    const types = await Type.find();
+    res.json(types);
+  } catch (error) {
+    res.status(500).send('Erreur lors de la récupération des types');
+  }
+});
+
+
 // Route POST pour ajouter un produit
 app.post('/products', upload.single('image'), async (req, res) => {
   const newProduct = new Product({

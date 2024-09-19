@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import colorsList from './colors'; // Importez les couleurs
-import { FaTruck } from 'react-icons/fa'; // Importer une icône de livraison
+import { FaTruck, FaBox, FaShoppingBag } from 'react-icons/fa';
+import dragCursor from '../img/drag.png'; // Importer l'image pour le curseur
+import Banner from './details-component/Banner';  // Importer le composant Banner
+import ImageSlider from './ps-component/ProductDescription';  // Importer le slider d'images
+import ProductDescription from './ps-component/ProductDescription';  // Importer la fiche description
+// import ProductTabs from './deta-component/ProductTabs';
+// import CreateType from './options/CreateType'
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -82,24 +88,49 @@ const ProductDetails = () => {
 
   return (
     <div className="relative">
-      {/* Bandeau de livraison */}
-      <div className="w-full bg-black text-white p-4 flex items-center justify-center">
+      
+      {/* Bandeau de livraison avec effet de changement de curseur */}
+      <div
+        className="w-full bg-black text-white p-4 flex items-center justify-center"
+        style={{ cursor: `url(${dragCursor}), auto` }} // Change the cursor when hovering
+      >
         <FaTruck className="mr-2" size={24} />
         <p className="text-sm font-light">Livraison offerte dès 139€ avec Mondial Relay</p>
       </div>
 
-      {/* Nom et prix du produit */}
-      <div className="w-full bg-gray-900 text-white p-10 text-center">
-        <p className="text-sm font-light">À partir de {product.prix} €</p>
-        <p className="text-3xl font-semibold mt-4">{product.name}</p>
+      {/* Bloc avec le prix et le nom du produit */}
+      <div className="w-full bg-gray-900 text-white p-10 flex flex-col justify-end">
+        <div className="flex flex-col items-start pl-12 pt-20">
+          <p className="text-l" style={{ fontFamily: '"Roboto", Sans-serif', fontWeight: '300' }}>
+            À partir de {product.prix} €
+          </p>
+          <p className="text-5xl font-semibold mt-4 uppercase" style={{ fontFamily: '"Roboto", Sans-serif' }}>
+            {product.name}
+          </p>
+          {/* <button
+            onClick={() => window.location.href = '/CreateType'}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Accéder à CreateType
+          </button> */}
+        </div>
+      </div>
+
+      {/* Bandeau sous le contenu */}
+      <div className="bg-white p-4 flex items-center justify-end mr-20 text-gray-400">
+        <div className="flex items-center space-x-2 pr-5">
+          <FaBox size={15} />
+          <span className="ml-2 text-sm">Livraison gratuite</span>
+        </div>
+        <p className=''>|</p>
+        <div className="flex items-center space-x-2 pl-5 pr-5">
+          <FaShoppingBag size={15} />
+          <span className="ml-2 text-sm">À partir de 149€</span>
+        </div>
       </div>
 
       {/* Détails du produit */}
-      <div className="p-6 max-w-4xl mx-auto bg-white shadow-md rounded-lg mt-6">
-        <h1 className="text-3xl font-extrabold text-gray-900 mb-6">Détails du produit</h1>
-        <p className="text-lg font-medium text-gray-700"><strong>Nom :</strong> {product.name}</p>
-        <p className="text-lg font-medium text-gray-700"><strong>Prix :</strong> {product.prix} €</p>
-        
+      <div className="p-6 mx-auto bg-gray-100 shadow-md">
         <h2 className="text-2xl font-semibold mt-6">Options</h2>
         <div className="grid grid-cols-1 gap-4 mt-4">
           {options.length > 0 ? (
@@ -201,8 +232,21 @@ const ProductDetails = () => {
           </div>
         )}
       </div>
-    </div>
+      <Banner title="PS VITA OLED" subtitle="Découvrez la nouvelle PS VITA OLED à partir de 189€" />
+
+      <div className="p-8">
+        <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8">
+          <ImageSlider />
+          <ProductDescription />
+        </div>
+        <div className="mt-8">
+          {/* <ProductTabs /> */}
+        </div>
+      </div>
+    </div >
   );
 };
 
 export default ProductDetails;
+
+

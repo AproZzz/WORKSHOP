@@ -7,7 +7,8 @@ import Fondsecrans from './screens/fonds-ecrans';
 import Carousel1 from './screens/acc_component/caroussel';
 import CreateProduct from './screens/createProduct';
 import CreateProductOption from './screens/options/CreateProductOption'; // Chemin correct selon votre structure // Assurez-vous que le chemin d'import est correct
-import AddColorForm from './screens/options/AddColor'; // Chemin correct selon votre structure // Assurez-vous que le chemin d'import est correct
+import AddColorForm from './screens/options/AddColor'; 
+import CreateType from './screens/options/CreateType';
 import Navbar from './Navbar';  // Importer le composant Navbar
 import Block2 from './screens/acc_component/block2';
 import CustomisationCards from './screens/acc_component/CustomisationCards';
@@ -46,7 +47,8 @@ export default function App() {
           <Route path="/create-product-option" element={<CreateProductOption />} />
           <Route path="/" element={<ProductList />} />
           <Route path="/products/:id" element={<ProductDetails />} /> {/* Product details route */}
-          <Route path="/add-color" element={<AddColorForm />} />        </Routes>
+          <Route path="/add-color" element={<AddColorForm />} /> 
+          <Route path="/CreateType" element={<CreateType />} />        </Routes>
       </main>
     </Router>
   );
