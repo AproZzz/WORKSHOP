@@ -1,13 +1,11 @@
+
+version: '3'
 services:
-  web:
-    image: nginx:latest
+  retroid:
+    container_name: retroid
+    build:
+      context: ./retroid  
     ports:
-      - "8080:80"
+      - "3001:3000"
     volumes:
-      - ./html:/usr/share/nginx/html
-  database:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./data:/data/db
+      - ./retroid:/var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid 
