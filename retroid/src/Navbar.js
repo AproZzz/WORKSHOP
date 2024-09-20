@@ -1,16 +1,33 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 const Navbar = () => {
-  const location = useLocation();  // Utilisation correcte de useLocation
+  const location = useLocation();
+  const [products, setProducts] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // État pour gérer l'ouverture du menu déroulant
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des produits:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const navigation = [
-    { name: "L'ATELIER", href: '/', current: location.pathname === '/' },
+    { name: "PERSONNALISATION", href: '/', current: location.pathname === '/', isDropdown: true },
     { name: 'PSVITA – OLED', href: '/panier', current: location.pathname === '/panier' },
     { name: 'ÉDITIONS LIMITÉES', href: '/product-list', current: location.pathname === '/product-list' },
     { name: 'ACCESSOIRES', href: '/product-details', current: location.pathname === '/product-details' },
@@ -40,16 +57,37 @@ const Navbar = () => {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <Link
+                  <div
                     key={item.name}
-                    to={item.href}
-                    className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium'
-                    )}
+                    className="relative group"
+                    onMouseEnter={() => item.isDropdown && setIsDropdownOpen(true)}
+                    onMouseLeave={() => item.isDropdown && setIsDropdownOpen(false)}
                   >
-                    {item.name}
-                  </Link>
+                    <Link
+                      to={item.href}
+                      className={classNames(
+                        item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
+                        'rounded-md px-3 py-2 text-sm font-medium'
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                    {item.isDropdown && isDropdownOpen && (
+                      <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                        <div className="py-1">
+                          {products.map((product) => (
+                            <Link
+                              key={product._id}
+                              to={`/products/${product._id}`}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                              {product.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>

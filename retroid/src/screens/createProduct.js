@@ -1,22 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom'; // Import de useNavigate pour la navigation
-import CreateProductOption from './options/CreateProductOption';
 
 const CreateProduct = () => {
     const [name, setName] = useState('');
     const [prix, setPrix] = useState('');
+    const [types, setTypes] = useState([]); // État pour les types
+    const [selectedType, setSelectedType] = useState(''); // État pour le type sélectionné
     const navigate = useNavigate(); // Initialisation de la fonction navigate
+
+    useEffect(() => {
+        // Récupérer les types disponibles
+        const fetchTypes = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/types');
+                setTypes(response.data);
+            } catch (error) {
+                console.error('Erreur lors de la récupération des types:', error);
+                toast.error('Erreur lors de la récupération des types');
+            }
+        };
+
+        fetchTypes();
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Créer le produit avec seulement le nom et le prix
+        // Créer le produit avec le nom, le prix et le type sélectionné
         const productData = {
             name: name,
             prix: prix,
+            typeId: selectedType // Inclure le type sélectionné
         };
 
         axios.post('http://localhost:5000/products', productData)
@@ -27,6 +44,7 @@ const CreateProduct = () => {
                 // Réinitialiser les champs du formulaire
                 setName('');
                 setPrix('');
+                setSelectedType('');
             })
             .catch((error) => {
                 console.error('Erreur lors de la création du produit:', error.response ? error.response.data : error.message);
@@ -64,6 +82,21 @@ const CreateProduct = () => {
                         onChange={(e) => setPrix(e.target.value)}
                         required
                     />
+                </div>
+                <div>
+                    <label htmlFor="type" className="block text-sm font-medium text-gray-700">Type</label>
+                    <select
+                        id="type"
+                        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        value={selectedType}
+                        onChange={(e) => setSelectedType(e.target.value)}
+                        required
+                    >
+                        <option value="">Sélectionnez un type</option>
+                        {types.map(type => (
+                            <option key={type._id} value={type._id}>{type.name}</option>
+                        ))}
+                    </select>
                 </div>
                 <button
                     type="submit"
