@@ -37,7 +37,7 @@ const CustomTabs = () => {
   ];
 
   return (
-    <div className="mt-16 bg-gray-100 w-4/6 m-auto mb-96">
+    <div className="mt-16 bg-gray-100 w-4/6 m-auto mb-20">
       <div className="flex border-b border-gray-200">
         {tabs.map((tab) => (
           <button

@@ -1,5 +1,5 @@
 ## Fichier : ./retroid/Dockerfile
-FROM node:18.10.0-alpine3.15
+FROM node:18-alpine
 
 WORKDIR /var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid
 

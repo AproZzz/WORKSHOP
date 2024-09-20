@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import colorsList from './colors'; // Importez les couleurs
 import { FaTruck, FaBox, FaShoppingBag } from 'react-icons/fa';
 import dragCursor from '../img/drag.png'; // Importer l'image pour le curseur
 import images from '../img/GB/FRONT/index'; // Assurez-vous que le chemin est correct
@@ -12,10 +11,10 @@ const ProductDetails = () => {
     const [options, setOptions] = useState([]);
     const [error, setError] = useState(null);
     const [selectedImages, setSelectedImages] = useState({
-        Pads: null,
-        Coque: null,
-        Ips: null,
-        Boutons: null,
+        Boutons: images.Boutons.GB_BUTTON_BLACK,
+        Pads: images.Pads.GB_PAD_BLACK,
+        Coque: images.Coque.GB_SHELL_BLACK,
+        Ips: images.Ips.GB_IPS_BLACK,
     });
 
     useEffect(() => {
@@ -140,9 +139,9 @@ const ProductDetails = () => {
                 </div>
             </div>
 
-            <div className="flex p-6 mx-auto bg-gray-100 shadow-md">
+            <div className="flex p-6 mx-auto bg-gray-100 shadow-md w-full">
                 <div className="w-1/2 flex justify-center items-center">
-                    <div className="image-display relative w-full h-80 border-2 border-gray-300">
+                    <div className="image-display relative w-full h-80">
                         {selectedImages.Coque && (
                             <img
                                 src={selectedImages.Coque}
@@ -165,9 +164,8 @@ const ProductDetails = () => {
                     </div>
                 </div>
 
-
                 <div className="w-1/2 flex flex-col">
-                    <h2 className="text-2xl font-semibold mt-6">Options</h2>
+                    <h2 className="text-2xl font-semibold mt-6 uppercase">Configuration</h2>
                     <div className="grid grid-cols-1 gap-4 mt-4">
                         {optionsList.map(option => (
                             <div key={option._id} className="bg-gray-100 p-4 rounded-md flex flex-col">

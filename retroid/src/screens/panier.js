@@ -3,6 +3,10 @@ import Header from './ps-component/Header';
 import ImageSlider from './ps-component/ImageSlider'; 
 import ProductDescription from './ps-component/ProductDescription'; 
 import CustomTabs from './details-component/CustomTabs';  // Importer les onglets personnalisés
+import ImageCarousel from './ps-component/Imagecarousel';
+import Description from './ps-component/description';
+import RetroGaming from './ps-component/RetroGaming';
+import ProductSection from './ps-component/ProductSection';
 
 
 const Panier = () => {
@@ -19,6 +23,11 @@ const Panier = () => {
         <div className="mt-8">
           <CustomTabs />
         </div>
+          <ImageCarousel />
+          <Description />
+          <RetroGaming />
+          <ProductSection />
+        
       </div>
     </div>
   );

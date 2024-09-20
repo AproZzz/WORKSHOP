@@ -1,19 +1,19 @@
 import React from 'react';
-import Slider from 'react-slick'; // Assurez-vous que react-slick et slick-carousel sont installés
+import Slider from 'react-slick'; 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const Footer = () => {
   const settings = {
     dots: true,
-    infinite: true, // Répétition infinie
+    infinite: true,
     speed: 500,
-    slidesToShow: 3, // 3 slides visibles en même temps
-    centerMode: true, // Pour centrer le slide actif
-    centerPadding: "0", // Pour retirer les marges sur les côtés
+    slidesToShow: 3, 
+    centerMode: true, 
+    centerPadding: "0", 
     slidesToScroll: 1,
-    autoplay: false, // Activation de l'autoplay
-    autoplaySpeed: 5000, // Autoplay toutes les 5 secondes
+    autoplay: false, 
+    autoplaySpeed: 5000,
   };
 
   return (
@@ -26,14 +26,14 @@ const Footer = () => {
       </div>
 
       {/* Carousel Section */}
-      <div className="w-screen">
+      <div className="w-screen max-w-screen overflow-hidden mb-8"> {/* Ajout d'un overflow-hidden pour éviter que les images débordent */}
         <Slider {...settings}>
           {/* Slide 1 */}
           <div className="relative transition-transform transform hover:scale-105">
             <img
               src="/img/BTTF-BG-1024x1024.jpg"
               alt="Retour vers le Futur"
-              className="object-cover w-full h-96 md:h-[500px] lg:h-[600px] transition-all duration-500 ease-in-out opacity-80 hover:opacity-100"
+              className="object-cover w-full h-96 md:h-[500px] lg:h-[600px] max-h-[600px] transition-all duration-500 ease-in-out opacity-80 hover:opacity-100"
             />
             <div className="absolute bottom-10 left-10">
               <h3 className="text-2xl md:text-4xl font-bold">RETRO VERS LE FUTUR</h3>
@@ -48,7 +48,7 @@ const Footer = () => {
             <img
               src="/img/TRA-BG-1024x1024.jpg"
               alt="Transformers"
-              className="object-cover w-full h-96 md:h-[500px] lg:h-[600px] transition-all duration-500 ease-in-out opacity-80 hover:opacity-100"
+              className="object-cover w-full h-96 md:h-[500px] lg:h-[600px] max-h-[600px] transition-all duration-500 ease-in-out opacity-80 hover:opacity-100"
             />
             <div className="absolute bottom-10 left-10">
               <h3 className="text-2xl md:text-4xl font-bold">TRANSFORMERS</h3>
@@ -57,8 +57,8 @@ const Footer = () => {
               </button>
             </div>
           </div>
-          </Slider>
-          </div>
+        </Slider>
+      </div>
 
       {/* Footer Section */}
       <footer className="bg-black py-8">
