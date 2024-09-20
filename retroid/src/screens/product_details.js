@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { FaTruck, FaBox, FaShoppingBag } from 'react-icons/fa';
+import { FaTruck, FaBox, FaShoppingBag, FaRedo } from 'react-icons/fa';
 import dragCursor from '../img/drag.png'; // Importer l'image pour le curseur
 import images from '../img/GB/FRONT/index'; // Assurez-vous que le chemin est correct
+import colors from './colors';
+import Banner from './details-component/Banner';
+import CustomAccordion from '../screens/ps-component/CustomAccordion'; // Importer le composant Banner
+import ImageSlider from './ps-component/ImageSlider';  // Importer le slider d'images
+import ProductDescription from './ps-component/ProductDescription';  // Importer la fiche description
+import CustomTabs from './details-component/CustomTabs';  // Importer les tabs
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -16,6 +22,8 @@ const ProductDetails = () => {
         Coque: images.Coque.GB_SHELL_BLACK,
         Ips: images.Ips.GB_IPS_BLACK,
     });
+
+    const [hoveredColor, setHoveredColor] = useState({ option: '', color: '' });
 
     useEffect(() => {
         const fetchProductDetails = async () => {
@@ -48,7 +56,7 @@ const ProductDetails = () => {
                 grey: images.Boutons.GB_BUTTON_GREY,
                 orange: images.Boutons.GB_BUTTON_ORANGE,
                 red: images.Boutons.GB_BUTTON_RED,
-                rose: images.Boutons.GB_BUTTON_ROSE,
+                pink: images.Boutons.GB_BUTTON_PINK,
                 white: images.Boutons.GB_BUTTON_WHITE,
             },
             Coque: {
@@ -60,7 +68,7 @@ const ProductDetails = () => {
                 clearGlass: images.Coque.GB_SHELL_CLEAR_GLASS,
                 clearOrange: images.Coque.GB_SHELL_CLEAR_ORANGE,
                 clearRed: images.Coque.GB_SHELL_CLEAR_RED,
-                dmg: images.Coque.GB_SHELL_DMG,
+                grey: images.Coque.GB_SHELL_DMG,
                 ghost: images.Coque.GB_SHELL_GHOST,
                 green: images.Coque.GB_SHELL_GREEN,
                 red: images.Coque.GB_SHELL_RED,
@@ -69,7 +77,7 @@ const ProductDetails = () => {
             },
             Ips: {
                 black: images.Ips.GB_IPS_BLACK,
-                dmg: images.Ips.GB_IPS_DMG,
+                grey: images.Ips.GB_IPS_DMG,
             },
             Pads: {
                 black: images.Pads.GB_PAD_BLACK,
@@ -77,8 +85,8 @@ const ProductDetails = () => {
                 clear: images.Pads.GB_PAD_CLEAR,
                 green: images.Pads.GB_PAD_GREEN,
                 red: images.Pads.GB_PAD_RED,
-                rose: images.Pads.GB_PAD_ROSE,
-                violet: images.Pads.GB_PAD_VIOLET,
+                pink: images.Pads.GB_PAD_PINK,
+                purple: images.Pads.GB_PAD_PURPLE,
                 yellow: images.Pads.GB_PAD_YELLOW,
             },
         };
@@ -91,6 +99,15 @@ const ProductDetails = () => {
         }
     };
 
+    const resetImages = () => {
+        setSelectedImages({
+            Boutons: images.Boutons.GB_BUTTON_BLACK,
+            Pads: images.Pads.GB_PAD_BLACK,
+            Coque: images.Coque.GB_SHELL_BLACK,
+            Ips: images.Ips.GB_IPS_BLACK,
+        });
+    };
+
     if (error) {
         return <p className="text-red-500">{error}</p>;
     }
@@ -100,10 +117,10 @@ const ProductDetails = () => {
     }
 
     const optionsList = [
-        { _id: '1', name: 'Boutons', colors: ['black', 'blue', 'red', 'orange', 'clearBlue'] },
-        { _id: '2', name: 'Coque', colors: ['black', 'blue', 'clearRed', 'yellow'] },
-        { _id: '3', name: 'Ips', colors: ['black', 'dmg'] },
-        { _id: '4', name: 'Pads', colors: ['black', 'blue', 'clear', 'green', 'red', 'rose', 'violet', 'yellow'] },
+        { _id: '1', name: 'Boutons', colors: ['black', 'blue', 'red', 'orange', 'pink', 'dmg', 'grey', 'white', 'clearBlack', 'clearOrange', 'clearGreen', 'clearGlass', 'clearBlue',] },
+        { _id: '2', name: 'Coque', colors: ['black', 'blue', 'red', 'yellow', 'clearBlack', 'clearOrange', 'clearGlass', 'clearBlue', 'clearOcean', 'clearRed', 'ghost', 'green', 'grey'] },
+        { _id: '3', name: 'Ips', colors: ['black', 'grey'] },
+        { _id: '4', name: 'Pads', colors: ['black', 'blue', 'clear', 'green', 'red', 'pink', 'purple', 'yellow'] },
     ];
 
     return (
@@ -138,16 +155,18 @@ const ProductDetails = () => {
                     <span className="ml-2 text-sm">À partir de 149€</span>
                 </div>
             </div>
-
-            <div className="flex p-6 mx-auto bg-gray-100 shadow-md w-full">
-                <div className="w-1/2 flex justify-center items-center">
-                    <div className="image-display relative w-full h-80">
+            <div className="flex pt-10 p-6 pb-20 mx-auto bg-gray-100 shadow-md w-full h-full">
+                <div className="w-1/2 flex flex-col items-start">
+                    <button onClick={resetImages} className="focus:outline-none ml-20">
+                        <FaRedo className="text-xl" />
+                    </button>
+                    <div className="image-display relative w-full h-full">
                         {selectedImages.Coque && (
                             <img
                                 src={selectedImages.Coque}
                                 alt="Coque sélectionnée"
                                 className="absolute top-0 left-0 w-full h-full object-contain"
-                                style={{ zIndex: 0 }} // Coque en bas
+                                style={{ zIndex: 0 }}
                             />
                         )}
                         {Object.entries(selectedImages).map(([category, image], index) => (
@@ -157,36 +176,83 @@ const ProductDetails = () => {
                                     src={image}
                                     alt={`${category} sélectionné`}
                                     className="absolute top-0 left-0 w-full h-full object-contain"
-                                    style={{ zIndex: index + 1 }} // Les autres éléments au-dessus
+                                    style={{ zIndex: index + 1 }}
                                 />
                             )
                         ))}
+                        {/* Afficher le nom de la couleur survolée */}
+                        {/* {hoveredColor && (
+                            <div className="absolute bottom-0 left-0 w-full text-center text-xl text-gray-700">
+                                {hoveredColor}
+                            </div>
+                        )} */}
+
                     </div>
                 </div>
-
-                <div className="w-1/2 flex flex-col">
-                    <h2 className="text-2xl font-semibold mt-6 uppercase">Configuration</h2>
-                    <div className="grid grid-cols-1 gap-4 mt-4">
+                {/* 
+                <div className="w-10/12 flex flex-col">
+                    <ProductDescription />
+                </div> */}
+                {/* <div className="w-1/2 flex flex-col"> */}
+                <div className="w-full p-8 bg-white shadow-lg rounded-lg">
+                    <div className="flex items-center space-x-2 bg-gray-100 w-full justify-around">
+                        <h2 className="text-2xl font-semibold mt-6 uppercase">Configuration</h2>
+                    </div>
                         {optionsList.map(option => (
-                            <div key={option._id} className="bg-gray-100 p-4 rounded-md flex flex-col">
-                                <span>{option.name}</span>
-                                <div className="flex space-x-2 mt-2">
-                                    {option.colors.map(color => (
-                                        <button
-                                            key={color}
-                                            onClick={() => handleColorClick(option.name, color)}
-                                            className={`bg-${color}-500 text-white px-3 py-1 rounded-md`}
-                                        >
-                                            {color.charAt(0).toUpperCase() + color.slice(1)}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
+                            <CustomAccordion
+                                // key={option._id} className="bg-white p-4 rounded-md flex flex-col">
+                                //     <span>{option.name}</span>
+                                //     <div className="flex flex-col space-y-2 mt-2">
+                                //         <div className="flex space-x-2">
+                                key={option._id}
+                                title={option.name}
+                                content={
+                                    <div className="flex flex-col space-y-2 mt-2">
+                                        {option.colors.map(colorName => {
+                                            const color = colors.find(c => c.name.toLowerCase() === colorName.replace(/ /g, '').toLowerCase());
+                                            return color ? (
+                                                <div key={color.name} className="relative flex flex-col items-center">
+                                                    <button
+                                                        onClick={() => handleColorClick(option.name, colorName)}
+                                                        onMouseEnter={() => setHoveredColor({ option: option.name, color: color.name })}
+                                                        onMouseLeave={() => setHoveredColor({ option: '', color: '' })}
+                                                        className="text-white px-3 py-3 rounded-full"
+                                                        style={{ backgroundColor: color.value }}
+                                                    />
+                                                    {hoveredColor.option === option.name && hoveredColor.color === color.name && (
+                                                        <div className="absolute bottom-[-30px] bg-gray-700 text-white text-xs rounded py-1 px-2">
+                                                            {color.name}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ) : null
+                                        })}
+                                    </div>
+                                }
+                            />
                         ))}
                     </div>
+</div>
+
+            {/* Utilisation du composant Banner */}
+            {/* <Banner title="PS VITA OLED" subtitle="Découvrez la nouvelle PS VITA OLED à partir de 189€" /> */}
+
+            <div className="p-8">
+                {/* Mise en page en flex pour afficher les deux composants côte à côte */}
+                <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8">
+                    {/* Composant ImageSlider à gauche */}
+                    {/* <ImageSlider /> */}
+
+                    {/* Composant ProductDescription à droite */}
+                    <ProductDescription />
+                </div>
+
+                {/* Ajouter les Tabs en dessous */}
+                <div className="mt-8">
+                    <CustomTabs />
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

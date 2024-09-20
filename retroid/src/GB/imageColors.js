@@ -18,7 +18,7 @@ const imageColors = {
     [images.GB_BUTTON_GREY]: colors.grey,
     [images.GB_BUTTON_ORANGE]: colors.orange,
     [images.GB_BUTTON_RED]: colors.red,
-    [images.GB_BUTTON_ROSE]: colors.rose,
+    [images.GB_BUTTON_PINK]: colors.pink,
     [images.GB_BUTTON_WHITE]: colors.white,
 
 
@@ -45,7 +45,7 @@ const imageColors = {
     [images.GB_PAD_CLEAR]: colors.transparent,
     [images.GB_PAD_GREEN]: colors.green,
     [images.GB_PAD_RED]: colors.red,
-    [images.GB_PAD_ROSE]: colors.rose,
+    [images.GB_PAD_PINK]: colors.pink,
     [images.GB_PAD_VIOLET]: colors.violet,
     [images.GB_PAD_YELLOW]: colors.yellow,
     // Ajoutez les associations d'images et de couleurs supplémentaires ici
