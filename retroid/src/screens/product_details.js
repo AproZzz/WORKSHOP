@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import colorsList from './colors'; // Importez les couleurs
 import { FaTruck, FaBox, FaShoppingBag } from 'react-icons/fa';
-import dragCursor from '../img/drag.png'; // Importer l'image pour le curseur
+//import dragCursor from './img/drag.png'; // Importer l'image pour le curseur
 import Banner from './details-component/Banner';  // Importer le composant Banner
 import ImageSlider from './ps-component/ProductDescription';  // Importer le slider d'images
 import ProductDescription from './ps-component/ProductDescription';  // Importer la fiche description
@@ -92,7 +92,7 @@ const ProductDetails = () => {
       {/* Bandeau de livraison avec effet de changement de curseur */}
       <div
         className="w-full bg-black text-white p-4 flex items-center justify-center"
-        style={{ cursor: `url(${dragCursor}), auto` }} // Change the cursor when hovering
+        style={{ cursor: `url('/img/drag.png'), auto` }} // Change the cursor when hovering
       >
         <FaTruck className="mr-2" size={24} />
         <p className="text-sm font-light">Livraison offerte dès 139€ avec Mondial Relay</p>

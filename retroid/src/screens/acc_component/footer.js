@@ -17,12 +17,12 @@ const Footer = () => {
   };
 
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white mt-12">
       <div className="text-center py-8">
+        <p className="text-sm md:text-lg">Créés pour être unique</p>
         <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
           ÉDITIONS LIMITÉES
         </h2>
-        <p className="text-sm md:text-lg">Créés pour être unique</p>
       </div>
 
       {/* Carousel Section */}

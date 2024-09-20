@@ -13,6 +13,7 @@ import Block2 from './screens/acc_component/block2';
 import CustomisationCards from './screens/acc_component/CustomisationCards';
 import Footer from './screens/acc_component/footer';
 
+
 export default function App() {
   return (
     <Router>

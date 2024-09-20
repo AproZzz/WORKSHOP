@@ -7,6 +7,7 @@ import ImageCarousel from './ps-component/Imagecarousel';
 import Description from './ps-component/description';
 import RetroGaming from './ps-component/RetroGaming';
 import ProductSection from './ps-component/ProductSection';
+import Footer2 from './acc_component/footer2';
 
 
 const Panier = () => {
@@ -14,7 +15,7 @@ const Panier = () => {
     <div>
       <Header />
 
-      <div className="p-8">
+      <div >
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8">
           <ImageSlider />
 
@@ -27,6 +28,7 @@ const Panier = () => {
           <Description />
           <RetroGaming />
           <ProductSection />
+          <Footer2 />
         
       </div>
     </div>

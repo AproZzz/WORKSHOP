@@ -46,21 +46,23 @@ export const Carousel1 = () => {
   };
 
   return (
-    <div className="relative w-full h-[740px] mx-auto overflow-hidden bg-cover bg-bottom">
+    <div className="relative w-full h-[740px] mx-auto overflow-hidden bg-cover bg-bottom" >
       <div className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {images.map((image, index) => (
           <div key={index} className="w-screen flex-shrink-0 relative">
-            <img src={image.src} alt={image.alt} className="w-full h-full object-cover object-center" />
+            <img src={image.src} alt={image.alt} className="w-full h-[740px] object-cover object-center" />
             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center text-center p-4">
               <div className="flex flex-col justify-center items-center mt-24">
-                <h1 className={`text-4xl font-bold mb-2 ${image.textColor}`}>
-                  {image.title}
-                </h1>
-                <p className={`text-lg mb-4 ${image.textColor}`}>
+                <p className={`text-xl mt-2 ${image.textColor}`}>
                   {image.subtitle}
                 </p>
-                <button className="bg-blue-500 text-white py-2 px-4 rounded">
+
+                <h1 className={`text-6xl font-bold ${image.textColor}`}>
+                  {image.title}
+                </h1>
+
+                <button className="bg-blue-500 text-white py-2 px-12 rounded-full mt-5">
                   {image.button}
                 </button>
               </div>
