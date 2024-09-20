@@ -195,7 +195,7 @@ const ProductDetails = () => {
                 </div> */}
                 {/* <div className="w-1/2 flex flex-col"> */}
                 <div className="w-full p-8 bg-white shadow-lg rounded-lg">
-                    <div className="flex items-center space-x-2 bg-gray-100 w-full justify-around">
+                    <div className="flex items-center space-x-2 mb-10 w-full justify-around">
                         <h2 className="text-2xl font-semibold mt-6 uppercase">Configuration</h2>
                     </div>
                         {optionsList.map(option => (
@@ -207,11 +207,11 @@ const ProductDetails = () => {
                                 key={option._id}
                                 title={option.name}
                                 content={
-                                    <div className="flex flex-col space-y-2 mt-2">
+                                    <div className="flex gap-6">
                                         {option.colors.map(colorName => {
                                             const color = colors.find(c => c.name.toLowerCase() === colorName.replace(/ /g, '').toLowerCase());
                                             return color ? (
-                                                <div key={color.name} className="relative flex flex-col items-center">
+                                                <div key={color.name} className="relative justify-between flex items-center">
                                                     <button
                                                         onClick={() => handleColorClick(option.name, colorName)}
                                                         onMouseEnter={() => setHoveredColor({ option: option.name, color: color.name })}
@@ -244,7 +244,7 @@ const ProductDetails = () => {
                     {/* <ImageSlider /> */}
 
                     {/* Composant ProductDescription à droite */}
-                    <ProductDescription />
+                    {/* <ProductDescription /> */}
                 </div>
 
                 {/* Ajouter les Tabs en dessous */}
