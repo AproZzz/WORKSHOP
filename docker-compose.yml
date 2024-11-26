@@ -1,4 +1,3 @@
-
 version: '3'
 services:
   retroid:
@@ -6,6 +5,22 @@ services:
     build:
       context: ./retroid  
     ports:
-      - "3001:3000"
+      - "3001:3000" 
     volumes:
-      - ./retroid:/var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid 
+      - ./retroid:/var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid
+    depends_on:
+      - mongodb 
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/retroiddb  
+    command: npm start 
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - "27017:27017" 
+    volumes:
+      - mongo-data:/data/db 
+
+volumes:
+  mongo-data: 

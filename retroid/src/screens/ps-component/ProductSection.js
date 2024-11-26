@@ -25,7 +25,6 @@ const ProductSection = () => {
             <div className="relative w-full">
               <img src={back} alt="Comparatif Reconditionné ou Neuf" className="rounded-lg shadow-md" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-1 bg-blue-500 h-full"></div>
               </div>
             </div>
           </div>
