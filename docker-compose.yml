@@ -1,0 +1,11 @@
+
+version: '3'
+services:
+  retroid:
+    container_name: retroid
+    build:
+      context: ./retroid  
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./retroid:/var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid 
