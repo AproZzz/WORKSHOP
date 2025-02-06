@@ -5,13 +5,13 @@ services:
     build:
       context: ./retroid  
     ports:
-      - "3001:3000" 
+      - "3000:3000" 
     volumes:
       - ./retroid:/var/www/html/cours-mds/workshop-M1/WORKSHOP/retroid
     depends_on:
       - mongodb 
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/retroiddb  
+      - MONGO_URI=mongodb://mongodb:27017/workshop  
     command: npm start 
 
   mongodb:
